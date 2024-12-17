@@ -1,2 +1,7 @@
 # ProjetoA-ai
-Um projeto q tem como intuito prover todos as necessidade de uma sorveteria
+Um projeto que tem como intuito ter um controle de uma açaiteria
+Funções:
+Controle de Caixa
+Controle de estoque
+Montar um açai Proprio
+Gerenciamento de Compra de um Cliente
