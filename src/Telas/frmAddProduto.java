@@ -1,6 +1,7 @@
 package Telas;
 
-import Conector.*;
+import Classes.*;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

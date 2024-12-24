@@ -1,4 +1,5 @@
 
+import Classes.DataBaseFunctions;
 import Telas.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -13,8 +14,9 @@ public class PrincipalPage {
     private JButton montarAçaiButton;
     private JButton button4;
     private JLabel Logo;
+    private JTable JtableUsuario;
+    private JComboBox CBProdutos;
     private JButton button1;
-
 
     public PrincipalPage() {
         btnNovoProduto.addActionListener(new ActionListener() {
@@ -48,5 +50,7 @@ public class PrincipalPage {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         frame.setSize(1000,400);
+        DataBaseFunctions dtB = new DataBaseFunctions();
+        System.out.println(dtB.qtdProdutos());
     }
 }
