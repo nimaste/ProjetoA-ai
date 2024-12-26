@@ -51,6 +51,6 @@ public class PrincipalPage {
         frame.setVisible(true);
         frame.setSize(1000,400);
         DataBaseFunctions dtB = new DataBaseFunctions();
-        System.out.println(dtB.qtdProdutos());
+        System.out.println(dtB.Produtos());
     }
 }
