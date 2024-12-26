@@ -27,10 +27,12 @@ public class DataBaseFunctions {
 
     public ArrayList<JBoxPrincipal> Produtos(){
         // cria uma lista de Array que ira receber os objetos
-        ArrayList<JBoxPrincipal> produtos = null;
+        // initializin a array list to put the objects Products
+        ArrayList<JBoxPrincipal> produtos = new ArrayList<>();
         // Abrindo a Conexão
         this.Objcon.OpenConexao();
-        JBoxPrincipal jb = new JBoxPrincipal();
+
+        JBoxPrincipal jb = new JBoxPrincipal();//Object
         String sql = "select id, nome from produtos";
         try {
             PreparedStatement ps = this.Objcon.con.prepareStatement(sql);
