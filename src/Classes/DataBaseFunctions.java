@@ -5,10 +5,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class DataBaseFunctions {
     Connector Objcon = new Connector();
+    private Object jb;
+
     public int qtdProdutos() {
         int resultado = 0;
         this.Objcon.OpenConexao();
@@ -25,19 +28,20 @@ public class DataBaseFunctions {
         }
     }
 
-    public ArrayList<JBoxPrincipal> Produtos(){
+    public List<JBoxPrincipal> Produtos(){
         // cria uma lista de Array que ira receber os objetos
         // initializin a array list to put the objects Products
-        ArrayList<JBoxPrincipal> produtos = new ArrayList<>();
+        List<JBoxPrincipal> produtos = new ArrayList<>();
         // Abrindo a Conexão
         this.Objcon.OpenConexao();
 
-        JBoxPrincipal jb = new JBoxPrincipal();//Object
+        
         String sql = "select id, nome from produtos";
         try {
             PreparedStatement ps = this.Objcon.con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
+                JBoxPrincipal jb = new JBoxPrincipal();//Object
                 jb.ComboItem(rs.getString("nome"), rs.getInt("id"));
                 produtos.add(jb);
             }
@@ -49,11 +53,4 @@ public class DataBaseFunctions {
 
     }
 
-    public Connector getObjcon() {
-        return Objcon;
-    }
-
-    public void setObjcon(Connector objcon) {
-        Objcon = objcon;
-    }
 }
