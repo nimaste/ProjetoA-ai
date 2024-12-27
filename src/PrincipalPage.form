@@ -87,7 +87,7 @@
         </constraints>
         <properties/>
       </component>
-      <component id="e6aa3" class="javax.swing.JComboBox" binding="CBProdutos">
+      <component id="e6aa3" class="javax.swing.JComboBox" binding="box">
         <constraints>
           <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>

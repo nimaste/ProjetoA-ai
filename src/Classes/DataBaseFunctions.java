@@ -41,7 +41,7 @@ public class DataBaseFunctions {
             PreparedStatement ps = this.Objcon.con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
-                JBoxPrincipal jb = new JBoxPrincipal();//Object
+                JBoxPrincipal jb = new JBoxPrincipal();//Object for each product
                 jb.ComboItem(rs.getString("nome"), rs.getInt("id"));
                 produtos.add(jb);
             }

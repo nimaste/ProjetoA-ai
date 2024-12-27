@@ -1,14 +1,13 @@
 package Telas;
 
 import Classes.*;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class frmAddProduto {
+public class frmAddProduto  {
     // Criando o objeto frame como statico para conseguir manipular as janelas abertas
     static JFrame frame = new JFrame("Imperio do Açai");
     private JPanel jpPrincipal;
@@ -38,6 +37,7 @@ public class frmAddProduto {
                     ps.setDouble(3,preco);
                     ps.setInt(4,qnt);
                     ps.executeUpdate();
+
                 }
                 catch (NumberFormatException exception){
                     JOptionPane.showMessageDialog(null, "Verifique se todos os campos estão preenchidos corretamente","ERRO",JOptionPane.ERROR_MESSAGE,null);
@@ -54,7 +54,7 @@ public class frmAddProduto {
         });
     }
 
-    public static void abrir() {
+    public static void abrir(JComboBox<JBoxPrincipal> box) {
         // se ja houver uma janela aberta ele ira colocala na frente e da foco nela
         if (!frame.isDisplayable()){
             frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -62,6 +62,7 @@ public class frmAddProduto {
             frame.setLocationRelativeTo(null);
             frame.setSize(500, 400);
             frame.setVisible(true);
+
         }
         else{
             frame.toFront();
