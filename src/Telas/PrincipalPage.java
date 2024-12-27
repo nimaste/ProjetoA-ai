@@ -1,16 +1,15 @@
+package Telas;
 
+import Classes.Connector;
 import Classes.DataBaseFunctions;
 import Classes.JBoxPrincipal;
-import Telas.*;
+
 import javax.swing.*;
 import java.awt.event.*;
-import java.util.List;
 
 public class PrincipalPage {
-
     DataBaseFunctions dtB = new DataBaseFunctions();   // Funções para o Banco de Dados
-
-    List <JBoxPrincipal> produtos = dtB.Produtos();   // Recebe os produtos Cadastrado No Banco de dados Armazenados como Objeto
+    // Recebe os produtos Cadastrado No Banco de dados Armazenados como Objeto
     private JPanel JpPrincipal;
     private JButton btnNovoProduto;
     private JButton btnProdutos;
@@ -22,9 +21,8 @@ public class PrincipalPage {
     private JButton button1;
 
     public PrincipalPage() {
-        for (JBoxPrincipal produto : produtos) {
-            box.addItem(produto);
-        }
+        // Colocando todos os produtos do banco de dados no JComboBox
+        dtB.Produtos(box);
         box.revalidate();
         box.repaint();
         btnNovoProduto.addActionListener(new ActionListener() {
@@ -48,11 +46,9 @@ public class PrincipalPage {
             }
         });
 
-        System.out.println(produtos.get(0).toString());
     }
 
-    public static void main(String[] args) {
-
+    public static void abrir(Connector con) {
         JFrame frame = new JFrame("Imperio do Açai");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setContentPane(new PrincipalPage().JpPrincipal);

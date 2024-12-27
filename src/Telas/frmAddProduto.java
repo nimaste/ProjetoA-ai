@@ -6,8 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-
-public class frmAddProduto  {
+public class frmAddProduto {
     // Criando o objeto frame como statico para conseguir manipular as janelas abertas
     static JFrame frame = new JFrame("Imperio do Açai");
     private JPanel jpPrincipal;
@@ -18,13 +17,14 @@ public class frmAddProduto  {
     private JTextField txtIdentificador;
 
 
-    public frmAddProduto() {
+    public frmAddProduto(JComboBox<JBoxPrincipal> box) {
         btnAddProduto.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Criando um objeto para fazer coneções com o banco de dados
                 Connector Objcon = new Connector();
                 Objcon.OpenConexao();
+                JBoxPrincipal jb = new JBoxPrincipal();
                 try {
                     int id = Integer.parseInt(txtIdentificador.getText());
                     int qnt = Integer.parseInt(txtQuantidade.getText());
@@ -37,7 +37,14 @@ public class frmAddProduto  {
                     ps.setDouble(3,preco);
                     ps.setInt(4,qnt);
                     ps.executeUpdate();
+                    jb.ComboItem(nome,id);
+                    box.addItem(jb);
 
+                    txtNome.setText("");
+                    txtIdentificador.setText("");
+                    txtPreco.setText("");
+                    txtQuantidade.setText("");
+                    JOptionPane.showMessageDialog(null,"Produto Cadastrado com Sucesso","Produto Cadastrado",JOptionPane.INFORMATION_MESSAGE);
                 }
                 catch (NumberFormatException exception){
                     JOptionPane.showMessageDialog(null, "Verifique se todos os campos estão preenchidos corretamente","ERRO",JOptionPane.ERROR_MESSAGE,null);
@@ -53,12 +60,13 @@ public class frmAddProduto  {
             }
         });
     }
-
+    // o Box vem do PrincipalPage
+    // Para addicionar o novo valor a JcomboBox
     public static void abrir(JComboBox<JBoxPrincipal> box) {
         // se ja houver uma janela aberta ele ira colocala na frente e da foco nela
         if (!frame.isDisplayable()){
             frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            frame.setContentPane(new frmAddProduto().jpPrincipal);
+            frame.setContentPane(new frmAddProduto(box).jpPrincipal);
             frame.setLocationRelativeTo(null);
             frame.setSize(500, 400);
             frame.setVisible(true);

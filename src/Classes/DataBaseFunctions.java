@@ -1,5 +1,6 @@
 package Classes;
 
+import javax.swing.*;
 import java.sql.Array;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -28,14 +29,10 @@ public class DataBaseFunctions {
         }
     }
 
-    public List<JBoxPrincipal> Produtos(){
-        // cria uma lista de Array que ira receber os objetos
-        // initializin a array list to put the objects Products
-        List<JBoxPrincipal> produtos = new ArrayList<>();
+    public void Produtos(JComboBox<JBoxPrincipal> box){
         // Abrindo a Conexão
         this.Objcon.OpenConexao();
 
-        
         String sql = "select id, nome from produtos";
         try {
             PreparedStatement ps = this.Objcon.con.prepareStatement(sql);
@@ -43,14 +40,12 @@ public class DataBaseFunctions {
             while (rs.next()){
                 JBoxPrincipal jb = new JBoxPrincipal();//Object for each product
                 jb.ComboItem(rs.getString("nome"), rs.getInt("id"));
-                produtos.add(jb);
+                box.addItem(jb);
             }
-            return produtos;
         }
         catch (SQLException e){
             throw new RuntimeException(e);
         }
 
     }
-
 }
