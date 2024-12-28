@@ -8,6 +8,13 @@ import javax.swing.*;
 import java.awt.event.*;
 
 public class PrincipalPage {
+    String[][] data = {
+            { "Kundan Kumar Jha", "4031", "CSE" },
+            { "Anand Jha", "6014", "IT" }
+    };
+
+    // Column Names
+    String[] columnNames = { "Name", "Roll Number", "Department" };
     DataBaseFunctions dtB = new DataBaseFunctions();   // Funções para o Banco de Dados
     // Recebe os produtos Cadastrado No Banco de dados Armazenados como Objeto
     private JPanel JpPrincipal;
@@ -16,9 +23,10 @@ public class PrincipalPage {
     private JButton montarAçaiButton;
     private JButton button4;
     private JLabel Logo;
-    private JTable JtableUsuario;
+    private JTable JtblCompra;
     JComboBox <JBoxPrincipal> box;
-    private JButton button1;
+    private JButton btnFinalizar;
+    private JButton btnAdd;
 
     public PrincipalPage() {
         // Colocando todos os produtos do banco de dados no JComboBox
@@ -46,6 +54,12 @@ public class PrincipalPage {
             }
         });
 
+        btnAdd.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
     }
 
     public static void abrir(Connector con) {
@@ -57,4 +71,5 @@ public class PrincipalPage {
         frame.setSize(1000,400);
 
     }
+
 }
