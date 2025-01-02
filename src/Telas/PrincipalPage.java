@@ -67,7 +67,13 @@ public class PrincipalPage extends JFrame{
 
             }
         });
-
+		//Abri A Janela Produtos que contem a lista de todos os produtos
+        btnProdutos.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frmProdutos.abrir();
+            }
+        });
     }
 
     public static void abrir(Connector con) {
