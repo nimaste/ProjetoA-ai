@@ -11,7 +11,7 @@ import java.util.Objects;
 
 public class DataBaseFunctions {
     Connector Objcon = new Connector();
-    private Object jb;
+    private Object ob;
 
     public int qtdProdutos() {
         int resultado = 0;
@@ -28,19 +28,21 @@ public class DataBaseFunctions {
             throw new RuntimeException(e);
         }
     }
-
-    public void Produtos(JComboBox<JBoxPrincipal> box){
+	//envia todos os produtos ao JcomBox
+    public void ProdutosCombo(JComboBox<JBoxPrincipal> box){
         // Abrindo a Conexão
         this.Objcon.OpenConexao();
 
         String sql = "select id, nome from produtos";
         try {
+			// Variavel para fazer o "Commit" ao Banco de dados
             PreparedStatement ps = this.Objcon.con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
+			// Passa por cada produtos dentro do Banco de dados 
             while (rs.next()){
-                JBoxPrincipal jb = new JBoxPrincipal();//Object for each product
-                jb.ComboItem(rs.getString("nome"), rs.getInt("id"));
-                box.addItem(jb);
+                JBoxPrincipal ob = new JBoxPrincipal();//Object for each product
+                ob.ComboItem(rs.getString("nome"), rs.getInt("id"));
+                box.addItem(ob);
             }
         }
         catch (SQLException e){
@@ -48,4 +50,19 @@ public class DataBaseFunctions {
         }
 
     }
+	// Esta função segue a mesma logica que o de cima
+	// Porem pega todos os dados do Produto pois cada um é para um caso especifico
+	public void Produtos(Object){
+		this.Objcon.OpenConexao();
+		String sql = "select * from produtos";
+		try{
+			PreparedStatement ps = this.Objcon.con.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()){
+                TableProdutos jb = new TableProdutos();//Object for each product
+                jb.ComboItem(rs.getInt("id"),rs.getString("nome"),rs.getInt("quant"),rs.getDouble("preco"));
+                box.addItem(jb);
+            }
+		}
+	}
 }

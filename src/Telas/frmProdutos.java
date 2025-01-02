@@ -7,21 +7,19 @@ public class frmProdutos extends JFrame {
     private JTable tabela;              // Vinculado à JTable do XML
     private JScrollPane scrollBar;      // Vinculado ao JScrollPane do XML
 
-    String[] nomeColunas = {"ID", "Nome", "Quantidade", "Preço/unidade"};
-    Object[][] dados = {
-        {"1", "Produto A", "10", "5.00"},
-        {"2", "Produto B", "20", "10.00"}
-    };
+    static String[] nomeColunas = {"ID", "Nome", "Quantidade", "Preço/unidade"};
+    static Object[][] dados = {};
 
     public frmProdutos() {
+		dados.appendValue()
         super("Produtos");
-        // Atualiza os dados e colunas da tabela
+		//inicialiando a tabela da forma correta
         tabela.setModel(new javax.swing.table.DefaultTableModel(dados, nomeColunas));
-        scrollBar.setViewportView(tabela); // Garante que a tabela esteja no JScrollPane
-        setContentPane(jpPrincipal);     // Configura o painel principal da janela
+        scrollBar.setViewportView(tabela);
+        setContentPane(jpPrincipal);  
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(500, 400);
-        setLocationRelativeTo(null);     // Centraliza a janela na tela
+        setLocationRelativeTo(null);
     }
 
     public static void abrir() {

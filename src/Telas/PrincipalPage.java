@@ -33,7 +33,7 @@ public class PrincipalPage extends JFrame{
         JScrollPane scroll = new JScrollPane(tabela);
 
         // Colocando todos os produtos do banco de dados no JComboBox
-        dtB.Produtos(box);
+        dtB.ProdutosCombo(box);
         box.revalidate();
         box.repaint();
 
