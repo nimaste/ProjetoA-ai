@@ -5,35 +5,39 @@ import Classes.DataBaseFunctions;
 import Classes.JBoxPrincipal;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
+import java.awt.*;
 import java.awt.event.*;
 
-public class PrincipalPage {
-    DataBaseFunctions dtB = new DataBaseFunctions();   // Funções para o Banco de Dados
-    // Recebe os produtos Cadastrado No Banco de dados Armazenados como Objeto
-    private JPanel JpPrincipal;
+public class PrincipalPage extends JFrame{
+    DataBaseFunctions dtB = new DataBaseFunctions();  // Funções para o Banco de Dados
+
+    //Iterface
+    JPanel JpPrincipal;
     private JButton btnNovoProduto;
     private JButton btnProdutos;
     private JButton montarAçaiButton;
     private JButton button4;
     private JLabel Logo;
-    private JTable jtblCompra;
     JComboBox <JBoxPrincipal> box;
     private JButton btnFinalizar;
     private JButton btnAdd;
+    JTable tabela;
+
+
+    Object [][] dados = {null,null,null};
+    String [] colunas = {"Nome", "Telefone", "Email"};
 
     public PrincipalPage() {
-        // Criação do modelo da tabela com colunas iniciais
-        String[] columnNames = {"Produto", "Preço"};
-        Object[][] data = {};
-        DefaultTableModel model = new DefaultTableModel(data, columnNames);
-        jtblCompra.setModel(model);
+
+        tabela = new JTable(dados,colunas);
+        JScrollPane scroll = new JScrollPane(tabela);
 
         // Colocando todos os produtos do banco de dados no JComboBox
         dtB.Produtos(box);
         box.revalidate();
         box.repaint();
+
+        //Listeners
         btnNovoProduto.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -63,6 +67,7 @@ public class PrincipalPage {
 
             }
         });
+
     }
 
     public static void abrir(Connector con) {
