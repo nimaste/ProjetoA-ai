@@ -1,18 +1,16 @@
 package Classes;
 
 import javax.swing.*;
-import java.sql.Array;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 public class DataBaseFunctions {
+
     Connector Objcon = new Connector();
     private Object ob;
-
+	// retorna a quantidade de Prodtos existentes no Mysql
+	//usado em dados no frmProdutos
     public int qtdProdutos() {
         int resultado = 0;
         this.Objcon.OpenConexao();
@@ -29,6 +27,7 @@ public class DataBaseFunctions {
         }
     }
 	//envia todos os produtos ao JcomBox
+	// usado na Jcombox em PrincipalPage
     public void ProdutosCombo(JComboBox<JBoxPrincipal> box){
         // Abrindo a Conexão
         this.Objcon.OpenConexao();
@@ -50,19 +49,40 @@ public class DataBaseFunctions {
         }
 
     }
-	// Esta função segue a mesma logica que o de cima
-	// Porem pega todos os dados do Produto pois cada um é para um caso especifico
-	public void Produtos(Object){
+	// Função Pega Todos os dados de todos Os produtos para colocar na tabelas em frmProdutos
+	//usado por dados em frmProdutos;
+	public void Produtos(Object[][] dados){
 		this.Objcon.OpenConexao();
 		String sql = "select * from produtos";
 		try{
 			PreparedStatement ps = this.Objcon.con.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
+
+			int linhas = 0;
+			// Ve o retorno do Mysql e adiciona os dados do produtos de acordo com a coluna ou seja i
 			while (rs.next()){
-                TableProdutos jb = new TableProdutos();//Object for each product
-                jb.ComboItem(rs.getInt("id"),rs.getString("nome"),rs.getInt("quant"),rs.getDouble("preco"));
-                box.addItem(jb);
-            }
-		}
-	}
+				//Passsagem por todas as colunas
+				for (int i = 0; i<4;i++){
+					//de acordo com o valor da coluna e adiciona um valor novo
+					switch(i){
+						case 0:
+							dados[linhas][i] = rs.getInt("id");
+							break;
+						case 1:
+							dados[linhas][i] = rs.getString("nome");
+							break;
+						case 2:
+							dados[linhas][i] = rs.getInt("quant");
+							break;
+						case 3:
+							dados[linhas][i] = rs.getDouble("preco");
+					}
+				}
+				linhas += 1;
+			}
+
+		} catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

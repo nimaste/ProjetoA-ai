@@ -1,19 +1,24 @@
 package Telas;
 
 import javax.swing.*;
+import Classes.*;
+
+import java.util.Arrays;
 
 public class frmProdutos extends JFrame {
+	static DataBaseFunctions db = new DataBaseFunctions();
     private JPanel jpPrincipal;         // Vinculado ao painel principal do XML
     private JTable tabela;              // Vinculado à JTable do XML
     private JScrollPane scrollBar;      // Vinculado ao JScrollPane do XML
 
     static String[] nomeColunas = {"ID", "Nome", "Quantidade", "Preço/unidade"};
-    static Object[][] dados = {};
+    static Object[][] dados = new Object[db.qtdProdutos()][4];
+
 
     public frmProdutos() {
-		dados.appendValue()
         super("Produtos");
-		//inicialiando a tabela da forma correta
+        db.Produtos(dados);
+
         tabela.setModel(new javax.swing.table.DefaultTableModel(dados, nomeColunas));
         scrollBar.setViewportView(tabela);
         setContentPane(jpPrincipal);  
